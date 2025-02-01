@@ -21,8 +21,8 @@ importers:
         specifier: ^16.4.7
         version: 16.4.7
       nestjs-infisical-sdk:
-        specifier: ^1.2.11
-        version: 1.2.11(@nestjs/common@10.4.15(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.4.15(@nestjs/common@10.4.15(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.4.15)(reflect-metadata@0.2.2)(rxjs@7.8.1))
+        specifier: ^1.2.30
+        version: 1.2.30(@nestjs/common@10.4.15(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.4.15(@nestjs/common@10.4.15(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.4.15)(reflect-metadata@0.2.2)(rxjs@7.8.1))
       reflect-metadata:
         specifier: ^0.2.0
         version: 0.2.2
@@ -2102,8 +2102,8 @@ packages:
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
-  nestjs-infisical-sdk@1.2.11:
-    resolution: {integrity: sha512-FR7sRhN3hEcsT2pzAKRUZVt4nsVigry8arLJU0s3Eju7p0AzLZX/eoz9iThDsL7k1qqMco42LhB5Rm3NYCD8uQ==}
+  nestjs-infisical-sdk@1.2.30:
+    resolution: {integrity: sha512-qEaa+rjaAE5zs3YvaIqakmnotj5qw0CU5UQZQYC+dmDkjeHBqaVRybwNU6jtoXwOa0IJNW9Ysi9w0+zncZ5poA==}
     peerDependencies:
       '@nestjs/common': ^8.0.0
       '@nestjs/core': ^8.0.0
@@ -5413,7 +5413,7 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  nestjs-infisical-sdk@1.2.11(@nestjs/common@10.4.15(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.4.15(@nestjs/common@10.4.15(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.4.15)(reflect-metadata@0.2.2)(rxjs@7.8.1)):
+  nestjs-infisical-sdk@1.2.30(@nestjs/common@10.4.15(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/core@10.4.15(@nestjs/common@10.4.15(reflect-metadata@0.2.2)(rxjs@7.8.1))(@nestjs/platform-express@10.4.15)(reflect-metadata@0.2.2)(rxjs@7.8.1)):
     dependencies:
       '@infisical/sdk': 3.0.5
       '@nestjs/common': 10.4.15(reflect-metadata@0.2.2)(rxjs@7.8.1)

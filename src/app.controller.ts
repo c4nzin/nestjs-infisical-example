@@ -12,6 +12,8 @@ import {
   ApiV3SecretsRawGet200Response,
   ApiV3SecretsRawSecretNameGet200Response,
   ApiV3SecretsRawSecretNamePost200Response,
+  ApiV1DynamicSecretsPost200Response,
+  ApiV1DynamicSecretsDelete200Response,
 } from "nestjs-infisical-sdk";
 
 @Controller()
@@ -21,7 +23,7 @@ export class AppController {
   @Get("secret/:secretName")
   public async getSecret(
     @Param("secretName") secretName: string
-  ): Promise<ApiV3SecretsRawSecretNameGet200Response> {
+  ): Promise<ApiV3SecretsRawSecretNameGet200Response["secret"]> {
     return this.appService.getSecret(secretName);
   }
 
@@ -56,5 +58,19 @@ export class AppController {
   @Get("secrets")
   public async listSecrets(): Promise<ApiV3SecretsRawGet200Response> {
     return this.appService.listSecrets();
+  }
+
+  @Post("dynamic-secret")
+  public async createDynamicSecret(): Promise<
+    ApiV1DynamicSecretsPost200Response["dynamicSecret"]
+  > {
+    return this.appService.createDynamicSecret();
+  }
+
+  @Delete("dynamic-secret/:dynamicSecretName")
+  public async deleteDynamicSecret(
+    @Param("dynamicSecretName") dynamicSecretName: string
+  ): Promise<ApiV1DynamicSecretsDelete200Response["dynamicSecret"]> {
+    return this.appService.deleteDynamicSecret(dynamicSecretName);
   }
 }
