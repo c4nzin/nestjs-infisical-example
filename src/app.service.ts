@@ -1,5 +1,11 @@
 import { Injectable, Logger } from "@nestjs/common";
-import { InfisicalSDK, InjectInfisical } from "nestjs-infisical-sdk";
+import {
+  ApiV3SecretsRawGet200Response,
+  ApiV3SecretsRawSecretNameGet200Response,
+  ApiV3SecretsRawSecretNamePost200Response,
+  InfisicalSDK,
+  InjectInfisical,
+} from "nestjs-infisical-sdk";
 
 @Injectable()
 export class AppService {
@@ -7,21 +13,23 @@ export class AppService {
 
   constructor(@InjectInfisical() private readonly infisicalSdk: InfisicalSDK) {}
 
-  public async getSecret(secretName: string): Promise<any> {
+  public async getSecret(
+    secretName: string
+  ): Promise<ApiV3SecretsRawSecretNameGet200Response> {
     this.logger.log(`Getting secret: ${secretName}`);
-    const secret = await this.infisicalSdk.secrets().getSecret({
+    const secretResponse = await this.infisicalSdk.secrets().getSecret({
       environment: "dev",
       secretName,
       projectId: process.env.INFISICAL_PROJECT_ID,
     });
-    this.logger.log(`Secret retrieved: ${JSON.stringify(secret)}`);
-    return secret;
+    this.logger.log(`Secret retrieved: ${JSON.stringify(secretResponse)}`);
+    return { secret: secretResponse };
   }
 
   public async createSecret(
     secretName: string,
     secretValue: string
-  ): Promise<any> {
+  ): Promise<ApiV3SecretsRawSecretNamePost200Response> {
     this.logger.log(`Creating secret: ${secretName}`);
     const secret = await this.infisicalSdk.secrets().createSecret(secretName, {
       environment: "dev",
@@ -35,7 +43,7 @@ export class AppService {
   public async updateSecret(
     secretName: string,
     secretValue: string
-  ): Promise<any> {
+  ): Promise<ApiV3SecretsRawSecretNamePost200Response> {
     this.logger.log(`Updating secret: ${secretName}`);
     const secret = await this.infisicalSdk.secrets().updateSecret(secretName, {
       environment: "dev",
@@ -46,7 +54,9 @@ export class AppService {
     return secret;
   }
 
-  public async deleteSecret(secretName: string): Promise<any> {
+  public async deleteSecret(
+    secretName: string
+  ): Promise<ApiV3SecretsRawSecretNamePost200Response> {
     this.logger.log(`Deleting secret: ${secretName}`);
     const secret = await this.infisicalSdk.secrets().deleteSecret(secretName, {
       environment: "dev",
@@ -56,7 +66,7 @@ export class AppService {
     return secret;
   }
 
-  public async listSecrets(): Promise<any> {
+  public async listSecrets(): Promise<ApiV3SecretsRawGet200Response> {
     this.logger.log("Listing secrets");
     const secrets = await this.infisicalSdk.secrets().listSecrets({
       environment: "dev",
