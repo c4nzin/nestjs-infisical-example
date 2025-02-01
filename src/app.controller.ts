@@ -8,6 +8,11 @@ import {
   Param,
 } from "@nestjs/common";
 import { AppService } from "./app.service";
+import {
+  ApiV3SecretsRawGet200Response,
+  ApiV3SecretsRawSecretNameGet200Response,
+  ApiV3SecretsRawSecretNamePost200Response,
+} from "nestjs-infisical-sdk";
 
 @Controller()
 export class AppController {
@@ -16,14 +21,14 @@ export class AppController {
   @Get("secret/:secretName")
   public async getSecret(
     @Param("secretName") secretName: string
-  ): Promise<any> {
+  ): Promise<ApiV3SecretsRawSecretNameGet200Response> {
     return this.appService.getSecret(secretName);
   }
 
   @Post("secret")
   public async createSecret(
     @Body() createSecretDto: { secretName: string; secretValue: string }
-  ): Promise<any> {
+  ): Promise<ApiV3SecretsRawSecretNamePost200Response> {
     return this.appService.createSecret(
       createSecretDto.secretName,
       createSecretDto.secretValue
@@ -34,7 +39,7 @@ export class AppController {
   public async updateSecret(
     @Param("secretName") secretName: string,
     @Body() updateSecretDto: { secretValue: string }
-  ): Promise<any> {
+  ): Promise<ApiV3SecretsRawSecretNamePost200Response> {
     return this.appService.updateSecret(
       secretName,
       updateSecretDto.secretValue
@@ -44,12 +49,12 @@ export class AppController {
   @Delete("secret/:secretName")
   public async deleteSecret(
     @Param("secretName") secretName: string
-  ): Promise<any> {
+  ): Promise<ApiV3SecretsRawSecretNamePost200Response> {
     return this.appService.deleteSecret(secretName);
   }
 
   @Get("secrets")
-  public async listSecrets(): Promise<any> {
+  public async listSecrets(): Promise<ApiV3SecretsRawGet200Response> {
     return this.appService.listSecrets();
   }
 }
