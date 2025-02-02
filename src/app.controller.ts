@@ -9,11 +9,13 @@ import {
 } from "@nestjs/common";
 import { AppService } from "./app.service";
 import {
-  ApiV3SecretsRawGet200Response,
-  ApiV3SecretsRawSecretNameGet200Response,
-  ApiV3SecretsRawSecretNamePost200Response,
-  ApiV1DynamicSecretsPost200Response,
-  ApiV1DynamicSecretsDelete200Response,
+  CreateDynamicSecretResult,
+  CreateSecretResult,
+  DeleteDynamicSecretResult,
+  DeleteSecretResult,
+  GetSecretResult,
+  ListSecretsResult,
+  UpdateSecretResult,
 } from "nestjs-infisical-sdk";
 
 @Controller()
@@ -23,14 +25,14 @@ export class AppController {
   @Get("secret/:secretName")
   public async getSecret(
     @Param("secretName") secretName: string
-  ): Promise<ApiV3SecretsRawSecretNameGet200Response["secret"]> {
+  ): Promise<GetSecretResult> {
     return this.appService.getSecret(secretName);
   }
 
   @Post("secret")
   public async createSecret(
     @Body() createSecretDto: { secretName: string; secretValue: string }
-  ): Promise<ApiV3SecretsRawSecretNamePost200Response> {
+  ): Promise<CreateSecretResult> {
     return this.appService.createSecret(
       createSecretDto.secretName,
       createSecretDto.secretValue
@@ -41,7 +43,7 @@ export class AppController {
   public async updateSecret(
     @Param("secretName") secretName: string,
     @Body() updateSecretDto: { secretValue: string }
-  ): Promise<ApiV3SecretsRawSecretNamePost200Response> {
+  ): Promise<UpdateSecretResult> {
     return this.appService.updateSecret(
       secretName,
       updateSecretDto.secretValue
@@ -51,26 +53,24 @@ export class AppController {
   @Delete("secret/:secretName")
   public async deleteSecret(
     @Param("secretName") secretName: string
-  ): Promise<ApiV3SecretsRawSecretNamePost200Response> {
+  ): Promise<DeleteSecretResult> {
     return this.appService.deleteSecret(secretName);
   }
 
   @Get("secrets")
-  public async listSecrets(): Promise<ApiV3SecretsRawGet200Response> {
+  public async listSecrets(): Promise<ListSecretsResult> {
     return this.appService.listSecrets();
   }
 
   @Post("dynamic-secret")
-  public async createDynamicSecret(): Promise<
-    ApiV1DynamicSecretsPost200Response["dynamicSecret"]
-  > {
+  public async createDynamicSecret(): Promise<CreateDynamicSecretResult> {
     return this.appService.createDynamicSecret();
   }
 
   @Delete("dynamic-secret/:dynamicSecretName")
   public async deleteDynamicSecret(
     @Param("dynamicSecretName") dynamicSecretName: string
-  ): Promise<ApiV1DynamicSecretsDelete200Response["dynamicSecret"]> {
+  ): Promise<DeleteDynamicSecretResult> {
     return this.appService.deleteDynamicSecret(dynamicSecretName);
   }
 }
