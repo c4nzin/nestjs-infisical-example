@@ -77,7 +77,12 @@ export class AppService {
     return secrets;
   }
 
-  public async createDynamicSecret(): Promise<CreateDynamicSecretResult> {
+  //fix
+  public async createDynamicSecret(
+    secretName: string,
+    projectSlug?: string,
+    environmentSlug?: string
+  ): Promise<CreateDynamicSecretResult> {
     const createDynamicSecret = await this.infisicalSdk
       .dynamicSecrets()
       .create({
@@ -93,9 +98,9 @@ export class AppService {
           },
         },
         defaultTTL: "1h",
-        environmentSlug: "dev",
-        name: "dynamic-secret-name",
-        projectSlug: "project-slug",
+        environmentSlug: environmentSlug || "dev",
+        name: secretName,
+        projectSlug: projectSlug || "project-slug",
       });
 
     this.logger.log(
