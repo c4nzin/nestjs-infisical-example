@@ -1,6 +1,13 @@
 A working example for nestjs-infisical-sdk
 
-https://www.npmjs.com/package/nestjs-infisical-sdk
+
+
+# To use 
+
+* Fork this repository
+* Run the cli command => pnpm run install
+* Send CRUD requests with Postman etc. Or just use our swagger : ```bash http://localhost:3000/swagger```
+
 
 ```bash
 ##############################################################################################################
