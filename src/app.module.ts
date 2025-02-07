@@ -1,10 +1,10 @@
 import { Module } from "@nestjs/common";
-import * as dotenv from "dotenv";
 import { AppController } from "./app.controller";
+import * as dotenvx from "@dotenvx/dotenvx";
 import { AppService } from "./app.service";
 import { InfisicalModule } from "nestjs-infisical-sdk";
 
-dotenv.config({});
+dotenvx.config({});
 
 @Module({
   imports: [
