@@ -12,6 +12,7 @@ dotenvx.config({});
       clientId: process.env.INFISICAL_CLIENT_ID,
       clientSecret: process.env.INFISICAL_CLIENT_SECRET,
       environment: "dev",
+      enableFileWatcher: true,
     }),
   ],
   controllers: [AppController],
