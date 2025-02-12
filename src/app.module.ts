@@ -11,8 +11,10 @@ dotenvx.config({});
     InfisicalModule.register({
       clientId: process.env.INFISICAL_CLIENT_ID,
       clientSecret: process.env.INFISICAL_CLIENT_SECRET,
+      projectId: process.env.INFISICAL_PROJECT_ID,
       environment: "dev",
-      enableFileWatcher: true,
+      watchEnvFile: true,
+      injectIntoProcessEnv: true,
     }),
   ],
   controllers: [AppController],
