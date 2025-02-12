@@ -20,12 +20,10 @@ dotenvx.config({});
     // )},
     InfisicalModule.registerAsync({
       useFactory: async (configService: ConfigService) => ({
-        apiKey: configService.get<string>("INFISICAL_API_KEY"),
-        apiSecret: configService.get<string>("INFISICAL_API_SECRET"),
-        injectIntoProcessEnv: true,
-        projectId: configService.get<string>("INFISICAL_PROJECT_ID"),
         clientId: configService.get<string>("INFISICAL_CLIENT_ID"),
         clientSecret: configService.get<string>("INFISICAL_CLIENT_SECRET"),
+        injectIntoProcessEnv: true,
+        projectId: configService.get<string>("INFISICAL_PROJECT_ID"),
         environment: "dev",
         watchEnvFile: true,
       }),
