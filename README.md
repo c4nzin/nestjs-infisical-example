@@ -1,4 +1,4 @@
-A working example for nestjs-infisical-sdk
+A working example of nestjs-infisical-sdk
 
 
 
