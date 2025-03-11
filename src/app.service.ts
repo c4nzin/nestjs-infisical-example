@@ -6,7 +6,7 @@ import {
   DeleteSecretResult,
   DynamicSecretProviders,
   GetSecretResult,
-  InfisicalSDK,
+  InfisicalService,
   InjectInfisical,
   ListSecretsResult,
   UpdateSecretResult,
@@ -16,11 +16,11 @@ import {
 export class AppService {
   private readonly logger = new Logger(AppService.name);
 
-  constructor(@InjectInfisical() private readonly infisicalSdk: InfisicalSDK) {}
+  constructor(@InjectInfisical() private readonly infisicalService: InfisicalService) {}
 
   public async getSecret(secretName: string): Promise<GetSecretResult> {
     this.logger.log(`Getting secret: ${secretName}`);
-    const secretResponse = await this.infisicalSdk.secrets().getSecret({
+    const secretResponse = await this.infisicalService.secrets().getSecret({
       environment: "dev",
       secretName,
       projectId: process.env.INFISICAL_PROJECT_ID,
@@ -34,7 +34,7 @@ export class AppService {
     secretValue: string
   ): Promise<CreateSecretResult> {
     this.logger.log(`Creating secret: ${secretName}`);
-    const secret = await this.infisicalSdk.secrets().createSecret(secretName, {
+    const secret = await this.infisicalService.secrets().createSecret(secretName, {
       environment: "dev",
       secretValue,
       projectId: process.env.INFISICAL_PROJECT_ID,
@@ -48,7 +48,7 @@ export class AppService {
     secretValue: string
   ): Promise<UpdateSecretResult> {
     this.logger.log(`Updating secret: ${secretName}`);
-    const secret = await this.infisicalSdk.secrets().updateSecret(secretName, {
+    const secret = await this.infisicalService.secrets().updateSecret(secretName, {
       environment: "dev",
       secretValue,
       projectId: process.env.INFISICAL_PROJECT_ID,
@@ -59,7 +59,7 @@ export class AppService {
 
   public async deleteSecret(secretName: string): Promise<DeleteSecretResult> {
     this.logger.log(`Deleting secret: ${secretName}`);
-    const secret = await this.infisicalSdk.secrets().deleteSecret(secretName, {
+    const secret = await this.infisicalService.secrets().deleteSecret(secretName, {
       environment: "dev",
       projectId: process.env.INFISICAL_PROJECT_ID,
     });
@@ -69,7 +69,7 @@ export class AppService {
 
   public async listSecrets(): Promise<ListSecretsResult> {
     this.logger.log("Listing secrets");
-    const secrets = await this.infisicalSdk.secrets().listSecrets({
+    const secrets = await this.infisicalService.secrets().listSecrets({
       environment: "dev",
       projectId: process.env.INFISICAL_PROJECT_ID,
     });
@@ -83,7 +83,7 @@ export class AppService {
     projectSlug?: string,
     environmentSlug?: string
   ): Promise<CreateDynamicSecretResult> {
-    const createDynamicSecret = await this.infisicalSdk
+    const createDynamicSecret = await this.infisicalService
       .dynamicSecrets()
       .create({
         provider: {
@@ -112,7 +112,7 @@ export class AppService {
   public async deleteDynamicSecret(
     dynamicSecretName: string
   ): Promise<DeleteDynamicSecretResult> {
-    const deleteDynamicSecret = await this.infisicalSdk
+    const deleteDynamicSecret = await this.infisicalService
       .dynamicSecrets()
       .delete(dynamicSecretName, {
         environmentSlug: "dev",
