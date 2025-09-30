@@ -9,13 +9,14 @@ import {
 } from "@nestjs/common";
 import { AppService } from "./app.service";
 import {
-  CreateDynamicSecretResult,
-  CreateSecretResult,
-  DeleteDynamicSecretResult,
-  DeleteSecretResult,
-  GetSecretResult,
-  ListSecretsResult,
-  UpdateSecretResult,
+  // ✅ YENİ TYPE İSİMLERİ (Response sonunda)
+  CreateSecretResponse,
+  UpdateSecretResponse,
+  DeleteSecretResponse,
+  GetSecretResponse,
+  ListSecretsResponse,
+  DeleteDynamicSecretResponse,
+  CreateDynamicSecretResponse,
 } from "nestjs-infisical-sdk";
 import { ApiTags, ApiOperation, ApiParam, ApiBody } from "@nestjs/swagger";
 
@@ -29,7 +30,7 @@ export class AppController {
   @ApiParam({ name: "secretName", description: "The name of the secret" })
   public async getSecret(
     @Param("secretName") secretName: string
-  ): Promise<GetSecretResult> {
+  ): Promise<GetSecretResponse> {
     return this.appService.getSecret(secretName);
   }
 
@@ -47,7 +48,7 @@ export class AppController {
   })
   public async createSecret(
     @Body() createSecretDto: { secretName: string; secretValue: string }
-  ): Promise<CreateSecretResult> {
+  ): Promise<CreateSecretResponse> {
     return this.appService.createSecret(
       createSecretDto.secretName,
       createSecretDto.secretValue
@@ -69,7 +70,7 @@ export class AppController {
   public async updateSecret(
     @Param("secretName") secretName: string,
     @Body() updateSecretDto: { secretValue: string }
-  ): Promise<UpdateSecretResult> {
+  ): Promise<UpdateSecretResponse> {
     return this.appService.updateSecret(
       secretName,
       updateSecretDto.secretValue
@@ -81,13 +82,13 @@ export class AppController {
   @ApiParam({ name: "secretName", description: "The name of the secret" })
   public async deleteSecret(
     @Param("secretName") secretName: string
-  ): Promise<DeleteSecretResult> {
+  ): Promise<DeleteSecretResponse> {
     return this.appService.deleteSecret(secretName);
   }
 
   @Get("secrets")
   @ApiOperation({ summary: "List all secrets" })
-  public async listSecrets(): Promise<ListSecretsResult> {
+  public async listSecrets(): Promise<ListSecretsResponse> {
     return this.appService.listSecrets();
   }
 
@@ -100,7 +101,7 @@ export class AppController {
       projectSlug?: string;
       environmentSlug?: string;
     }
-  ): Promise<CreateDynamicSecretResult> {
+  ): Promise<CreateDynamicSecretResponse> {
     return this.appService.createDynamicSecret(
       createDynamicSecretDto.secretName,
       createDynamicSecretDto.projectSlug,
@@ -116,7 +117,7 @@ export class AppController {
   })
   public async deleteDynamicSecret(
     @Param("dynamicSecretName") dynamicSecretName: string
-  ): Promise<DeleteDynamicSecretResult> {
+  ): Promise<DeleteDynamicSecretResponse> {
     return this.appService.deleteDynamicSecret(dynamicSecretName);
   }
 }
